@@ -23,6 +23,9 @@ dependencies {
     implementation 'com.codeborne:selenide:6.1.1'
     testImplementation 'io.qameta.allure:allure-junit5:2.13.6'
     testImplementation 'io.qameta.allure:allure-selenide:2.20.1'
+    implementation 'commons-dbutils:commons-dbutils:1.7'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 allure {
