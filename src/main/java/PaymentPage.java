@@ -18,19 +18,11 @@ import java.util.Properties;
 
 
 public class PaymentPage {
-    static Properties props = new Properties();
 
-    static {
-        try (InputStream inputStream = new FileInputStream("application.properties")) {
-            props.load(inputStream);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
     //Получаем значения свойств
     private static String url = getProperty("db.url");
-    private static String appURL = props.getProperty("appURL");
-    private static String appPORT = props.getProperty("appPORT");
+    private static String appURL = System.getProperty("app.url");
+    private static String appPORT = System.getProperty("app.port");
     private static String userDB = getProperty("app.userDB");
     private static String password = getProperty("app.password");
 
@@ -43,8 +35,6 @@ public class PaymentPage {
     static SelenideElement cardOwner = inputFields.get(3);
     static SelenideElement cvcOrCvvNumber = inputFields.get(4);
 
-    public PaymentPage() throws FileNotFoundException {
-    }
     //Находим кнопку "Купить" и кликаем на неё
     public static void usualPayment() {
         open(appURL +":"+appPORT);

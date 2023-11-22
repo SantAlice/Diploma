@@ -34,7 +34,7 @@ public class PaymentTest {
     void paymentWithApprovedCard() throws SQLException {
         PaymentPage.usualPayment();
         PaymentPage.setCardNumber("4444444444444441");
-        PaymentPage.setCardMonth("01");
+        PaymentPage.setCardMonth("03");
         PaymentPage.setCardYear("24");
         PaymentPage.setCardOwner("Vasiliy Alekseev");
         PaymentPage.setCardCVV("999");

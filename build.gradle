@@ -20,12 +20,18 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.6.1'
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.11.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.4.1'
-    implementation 'com.codeborne:selenide:6.1.1'
+    implementation 'com.codeborne:selenide:6.15.0'
+    testImplementation 'mysql:mysql-connector-java:8.0.18'
+    testImplementation 'org.postgresql:postgresql:42.2.8'
+    testImplementation 'org.postgresql:postgresql:42.2.8'
     testImplementation 'io.qameta.allure:allure-junit5:2.13.6'
     testImplementation 'io.qameta.allure:allure-selenide:2.20.1'
     implementation 'commons-dbutils:commons-dbutils:1.7'
     implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.springframework:spring-jdbc:5.2.9.RELEASE'
+
+
 }
 
 allure {
@@ -38,4 +44,11 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'file.encoding', 'UTF-8'
+    systemProperty 'db.url', System.getProperty('db.url', 'jdbc:mysql://192.168.99.100:3306/app')
+    systemProperty 'app.url', System.getProperty('app.url','http://localhost')
+    systemProperty 'app.port', System.getProperty('app.port','8080')
+    systemProperty 'app.userDB', System.getProperty('app.userDB','app')
+    systemProperty 'app.password', System.getProperty('app.password','pass')
 }
