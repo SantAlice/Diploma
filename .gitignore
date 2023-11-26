@@ -45,3 +45,10 @@ Thumbs.db*
 node_modules
 .idea
 target
+
+/hs_err_pid29836.log
+/hs_err_pid31204.log
+/replay_pid29836.log
+/replay_pid31204.log
+
+/datams/mysql.sock

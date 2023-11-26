@@ -1,30 +1,24 @@
 import com.codeborne.selenide.SelenideElement;
 
-import java.io.*;
 import java.time.Duration;
 import java.util.List;
-import java.util.Properties;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 import static java.lang.System.getProperty;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.DriverManager;
-import java.util.Properties;
+
 
 
 public class PaymentPage {
 
     //Получаем значения свойств
-    private static String url = getProperty("db.url");
+    private static String url = System.getProperty("db.url");
     private static String appURL = System.getProperty("app.url");
     private static String appPORT = System.getProperty("app.port");
-    private static String userDB = getProperty("app.userDB");
-    private static String password = getProperty("app.password");
+    private static String userDB = System.getProperty("app.userDB");
+    private static String password = System.getProperty("app.password");
 
     //Получаем элементы со сторницы по индкесу
     static List<SelenideElement> inputFields = $$(".input__control");
@@ -41,6 +35,7 @@ public class PaymentPage {
         $$(".button__content").find(exactText("Купить")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Оплата по карте")).shouldBe(visible);
     }
+
     //Находим кнопку "Купить в кредит" и кликаем на неё
     public static void creditPayment() {
         open(appURL + ":" + appPORT);
@@ -54,25 +49,25 @@ public class PaymentPage {
                 .shouldBe(visible, Duration.ofSeconds(15));
     }
     //Проверяем статус неуспешной покупки
-    public void checkErrorMessage() {
+    public static void checkErrorMessage() {
         $$(".notification__title")
                 .find(exactText("Ошибка"))
                 .shouldBe(visible, Duration.ofSeconds(15));
     }
     //Проверяем оповещение об ошибке поля
-    public void checkWrongFormatMessage() {
+    public static void checkWrongFormatMessage() {
         $$(".input__sub")
                 .find(exactText("Неверный формат"))
                 .shouldBe(visible);
     }
     //Проверяем оповещение об ошибке поля
-    public void checkExpiredMessage() {
+    public static void checkExpiredMessage() {
         $$(".input__sub")
                 .find(exactText("Истёк срок действия карты"))
                 .shouldBe(visible);
     }
     //Проверяем оповещение об ошибке поля
-    public void checkEmptyMessage() {
+    public static void checkEmptyMessage() {
         $$(".input__sub")
                 .find(exactText("Поле обязательно для заполнения"))
                 .shouldBe(visible);
