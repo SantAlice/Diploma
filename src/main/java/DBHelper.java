@@ -1,17 +1,8 @@
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-
-import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 
 public class DBHelper {
@@ -34,28 +25,30 @@ public class DBHelper {
             e.printStackTrace();
         }
     }
+
     //проверяем статус платежа в таблице БД
-    public static void checkPaymentStatus(Status status) {
+    public static String checkPaymentStatus() {
         try (Connection conn = DriverManager.getConnection(url, userDB, password)) {
             QueryRunner runner = new QueryRunner();
             String paymentDataSQL = "SELECT status FROM payment_entity;";
-            PaymentStatusStorage payment = runner.query(conn, paymentDataSQL, new BeanHandler<>(PaymentStatusStorage.class));
-            assertEquals(status, payment.status);
+            String status = runner.query(conn, paymentDataSQL, new ScalarHandler<>());
+            return status;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
     //Проверяем статус кредита в таблице БД
-    public static void checkCreditStatus(Status status) {
+    public static String checkCreditStatus() {
         try (Connection conn = DriverManager.getConnection(url, userDB, password)) {
             QueryRunner runner = new QueryRunner();
             String creditDataSQL = "SELECT status FROM credit_request_entity;";
-            CreditStatusStorage credit = runner.query(conn, creditDataSQL, new BeanHandler<>(CreditStatusStorage.class));
-            assertEquals(status, credit.status);
+            String status = runner.query(conn, creditDataSQL, new ScalarHandler<>());
+            return status;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
+
     }
-
-
 }

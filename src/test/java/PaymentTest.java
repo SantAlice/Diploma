@@ -148,7 +148,7 @@ public class PaymentTest {
         PaymentPage.setCardOwner("Vasily Alekseev");
         PaymentPage.setCardCVV("99");
         PaymentPage.pushContinueButton();
-        PaymentPage.checkWrongFormatMessage();
+        PaymentPage.checkEmptyMessage();
     }
 
     @Test //Обычная покупка с невалидным cvv, буквы
@@ -331,7 +331,7 @@ public class PaymentTest {
         PaymentPage.setCardOwner("Vasily Alekseev");
         PaymentPage.setCardCVV("999");
         PaymentPage.pushContinueButton();
-        PaymentPage.checkEmptyMessage();
+        PaymentPage.checkErrorMessage();
     }
 
 

@@ -158,7 +158,7 @@ public class CreditTest {
         PaymentPage.setCardOwner("Vasily Alekseev");
         PaymentPage.setCardCVV("99");
         PaymentPage.pushContinueButton();
-        PaymentPage.checkWrongFormatMessage();
+        PaymentPage.checkEmptyMessage();
     }
 
     @Test
@@ -345,5 +345,19 @@ public class CreditTest {
         PaymentPage.pushContinueButton();
         PaymentPage.checkEmptyMessage();
     }
+
+    @Test
+        //Обычная покупка с невалидным cvv, пустое поле
+    void creditWithRandomCard() throws SQLException {
+        PaymentPage.creditPayment();
+        PaymentPage.setCardNumber("1234567812345678");
+        PaymentPage.setCardMonth("04");
+        PaymentPage.setCardYear("24");
+        PaymentPage.setCardOwner("Vasily Alekseev");
+        PaymentPage.setCardCVV("999");
+        PaymentPage.pushContinueButton();
+        PaymentPage.checkErrorMessage();
+    }
+
 
 }

@@ -7,8 +7,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
-import static java.lang.System.getProperty;
-
 
 
 public class PaymentPage {
@@ -31,7 +29,7 @@ public class PaymentPage {
 
     //Находим кнопку "Купить" и кликаем на неё
     public static void usualPayment() {
-        open(appURL +":"+appPORT);
+        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Оплата по карте")).shouldBe(visible);
     }
@@ -42,36 +40,42 @@ public class PaymentPage {
         $$(".button__content").find(exactText("Купить в кредит")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }
+
     //Проверяем статус успешной покупки
     public static void checkSuccessMessage() {
         $$(".notification__title")
                 .find(exactText("Успешно"))
                 .shouldBe(visible, Duration.ofSeconds(15));
     }
+
     //Проверяем статус неуспешной покупки
     public static void checkErrorMessage() {
         $$(".notification__title")
                 .find(exactText("Ошибка"))
                 .shouldBe(visible, Duration.ofSeconds(15));
     }
+
     //Проверяем оповещение об ошибке поля
     public static void checkWrongFormatMessage() {
         $$(".input__sub")
                 .find(exactText("Неверный формат"))
                 .shouldBe(visible);
     }
+
     //Проверяем оповещение об ошибке поля
     public static void checkExpiredMessage() {
         $$(".input__sub")
                 .find(exactText("Истёк срок действия карты"))
                 .shouldBe(visible);
     }
+
     //Проверяем оповещение об ошибке поля
     public static void checkEmptyMessage() {
         $$(".input__sub")
                 .find(exactText("Поле обязательно для заполнения"))
                 .shouldBe(visible);
     }
+
     //Устанавливаем значения в поля карт (вручную в тестах)
     public static void setCardNumber(String cNumber) {
         cardNumber.setValue(cNumber);
@@ -99,6 +103,7 @@ public class PaymentPage {
                 .find(exactText(buttonText))
                 .shouldBe(visible);
     }
+
     public static void pushContinueButton() {
         findButtonByText("Продолжить").click();
     }
