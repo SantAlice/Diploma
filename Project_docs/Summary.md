@@ -30,3 +30,7 @@
 
 Расхождение: ~ *14* часов по причине сработавших рисков
 
+**Репорт по итогам автоматизации в скриншотах:**
+
+![enter image description here](C:\Users\77761\Desktop\Diploma\Project_docs\Screenshot_7.png)
+![enter image description here](C:\Users\77761\Desktop\Diploma\Project_docs\Screenshot_8.png)
